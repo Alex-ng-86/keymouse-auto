@@ -1,0 +1,6 @@
+pyautogui
+keyboard
+pyinstaller
+pynput
+customtkinter
+packaging
