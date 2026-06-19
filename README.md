@@ -1,2 +1,109 @@
-# keymouse-auto
-Simple keyboard and mouse auto-operation utility. Supports recording, scripting and loop playback of all input actions to free repetitive manual operations. 极简键鼠自动操作工具，可录制、编写键鼠脚本并循环执行，解放重复手动操作。
+# 灵动点击助手 (KeyMouse Auto)
+
+
+一个跨平台的键鼠自动操作桌面工具，支持录制、脚本编辑与循环回放，帮助解放重复性手动操作。
+
+## ✨ 功能特性
+
+| 功能 | 说明 |
+|------|------|
+| **简单连点器** | 固定位置持续点击，支持随机间隔和随机位置偏移，模拟人类操作节奏 |
+| **脚本录制** | 实时录制鼠标点击、移动、滚轮、键盘按键及等待时间，自动生成操作脚本 |
+| **脚本编辑** | 可视化编辑录制的脚本，支持增删改查、调整顺序、设置前置等待时间 |
+| **循环回放** | 按脚本逐条回放操作，支持自定义循环次数 |
+| **防检测模式** | 开启后自动添加坐标微抖、打字间隔随机化、等待时间扰动等，降低被识别风险 |
+| **全局热键** | `F8` 切换连点器 · `F9` 切换录制/停止 · `F10` 切换回放/停止 · `Esc` 全局停止 |
+| **脚本持久化** | 脚本以 JSON 格式保存/加载，方便复用和分享 |
+
+## 📦 快速开始
+
+### 环境要求
+
+- Python 3.8+
+- Windows / macOS / Linux
+
+### 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+依赖清单：
+
+| 包 | 用途 |
+|----|------|
+| `customtkinter` | 现代化暗色 UI 框架 |
+| `pyautogui` | 键鼠控制与坐标获取 |
+| `keyboard` | 全局热键监听 |
+| `pynput` | 鼠标/键盘事件捕获（录制） |
+| `packaging` | 版本解析辅助 |
+
+### 运行程序
+
+```bash
+python auto_clicker.py
+```
+
+## 🖥️ 界面概览
+
+程序启动后包含两个标签页：
+
+### 简单连点器
+
+设置点击间隔、随机偏移量，点击「开始」即可在光标当前位置持续自动点击。
+
+### 脚本编辑器
+
+1. **录制** — 按 `F9` 或点击录制按钮，随后所有键鼠操作将被记录
+2. **编辑** — 在列表中双击某行可编辑参数；通过工具栏按钮增删改排序
+3. **保存/加载** — 脚本导出为 `.json` 文件，也可从文件导入
+4. **回放** — 设置循环次数，勾选「防检测」后按 `F10` 或点击开始回放
+
+## 🔨 编译打包
+
+使用 PyInstaller 将程序打包为独立可执行文件：
+
+```bash
+# 打包为单文件 exe（去控制台窗口，带图标）
+pyinstaller KeyMousePro.spec
+
+# 输出位于 dist/KeyMousePro.exe
+```
+
+也可使用内置的 spec 文件分别打包不同名称的版本：
+
+```bash
+pyinstaller auto_clicker.spec
+pyinstaller 灵动点击助手.spec
+```
+
+## 🏗️ 项目结构
+
+```
+keymouse-auto/
+├── auto_clicker.py          # 主程序（含 UI + 逻辑）
+├── create_icon.py           # 图标生成脚本
+├── app_icon.ico             # 应用图标
+├── requirements.txt         # Python 依赖
+├── KeyMousePro.spec         # PyInstaller 配置（去控制台版）
+├── auto_clicker.spec        # PyInstaller 配置（带控制台版）
+├── 灵动点击助手.spec         # PyInstaller 配置（中文命名版）
+├── dist/                    # 编译输出目录
+└── build/                   # PyInstaller 构建缓存
+```
+
+## ⌨️ 快捷键速查
+
+| 快捷键 | 功能 |
+|--------|------|
+| `F8` | 切换简单连点器（开始/停止） |
+| `F9` | 切换脚本录制（开始/停止） |
+| `F10` | 切换脚本回放（开始/停止） |
+| `Esc` | 全局停止所有操作 |
+
+## ⚠️ 注意事项
+
+- 首次运行时可能需要授予 Python 辅助功能权限（macOS）
+- 录制模式下请避免不必要的键鼠操作，以免污染脚本
+- 防检测模式并非绝对匿名，仅用于模拟轻度人类行为
+- 请勿将本工具用于违反服务条款或法律法规的场景
